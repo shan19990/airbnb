@@ -22,4 +22,5 @@ urlpatterns = [
     path("add/",BookingSerializers.as_view(),name="addbooking"),
     path("find/user/<int:user_id>/",UserBookingListView.as_view(),name="finduserbookings"),
     path("find/<int:id>/",EditBookingView.as_view(),name="findbooking"),
+    path("find/owner/<int:house_owner>/",UserBookingListView.as_view(),name="findownerbookings"),
 ]

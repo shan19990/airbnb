@@ -25,3 +25,10 @@ class EditBookingView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BookingModel.objects.all()
     serializer_class = BookingSerializer
     lookup_field = "id"
+
+class UserBookingListView(generics.ListAPIView):
+    serializer_class = BookingSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs.get('house_owner')
+        return BookingModel.objects.filter(user_id=user_id)
