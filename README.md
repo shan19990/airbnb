@@ -20,4 +20,4 @@ http://127.0.0.1:3000/api/listings/house/review/edit/{id}/ - Method = GET,PATCH,
 Bookings - <br>
 http://127.0.0.1:3000/api/bookings/add/ - Method = POST - Add a booking	<br> 
 http://127.0.0.1:3000/api/bookings/find/user/{user_id}/ - Method = GET - fetch all booking details of a user <br>
-http://127.0.0.1:3000/api/bookings/find/ - Method = GET,PATCH,PUT,DELETE - Gets detail of a single Booking	<br>
+http://127.0.0.1:3000/api/bookings/find/{id}/ - Method = GET,PATCH,PUT,DELETE - Gets detail of a single Booking	<br>
