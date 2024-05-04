@@ -1,18 +1,28 @@
 from rest_framework import serializers
-from .models import HouseModel
+from .models import *
+from django.db.models import Avg
 
-class HouseSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = HouseModel
+        model = ReviewModel
         fields = "__all__"
 
-        extra_kwargs = {
-            'embeded_url': {'required': False},
-            'latitude': {'required': False},
-            'longitude': {'required': False},
-        }
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HouseImageModel
+        fields = "__all__"
 
-        def to_internal_value(self, data):
-            # Convert double quotes to single quotes
-            data['embeded_url'] = data.get('embeded_url').replace('"', "'")
-            return super().to_internal_value(data)
+class HouseSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True,required=False)
+    reviews = ReviewSerializer(many=True ,required=False)
+    main_image = serializers.ImageField(required=False)
+
+    class Meta:
+        model = HouseModel
+        fields = ['id', 'owner', 'title', 'description', 'address', 'city', 'state', 'country', 'zip_code', 'latitude', 'longitude', 'bedrooms', 'bathrooms', 'price_per_night', 'embeded_url', 'main_image', 'images', 'reviews', 'average_rating']
+
+    average_rating = serializers.SerializerMethodField()
+
+    def get_average_rating(self, obj):
+        return obj.reviews.aggregate(Avg('rating'))['rating__avg']
+    

@@ -22,4 +22,8 @@ urlpatterns = [
     path('house/', HouseListView.as_view(), name="houses"),
     path('house/add/', HouseCreateView.as_view(), name="addhouse"),
     path('house/<int:id>/', HouseDetailView.as_view(), name="edithouse"),
+    path('house/image/add/', HousePhotosCreateView.as_view(), name="addimage"),
+    path('house/image/edit/<int:id>/', HousePhotosEditView.as_view(), name="editimage"),
+    path('house/review/add/', HouseReviewCreateView.as_view(), name="addreview"),
+    path('house/review/edit/<int:id>/', HouseReviewEditView.as_view(), name="editreview"),
 ]
